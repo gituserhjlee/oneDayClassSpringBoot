@@ -1,13 +1,15 @@
 package com.example.security.service;
 
 import com.example.security.dto.UserDto;
-import com.example.security.repository.UserRepository;
 import com.example.security.entity.user.User;
+import com.example.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -31,10 +33,18 @@ public class UserService implements UserDetailsService {
     public Long save(UserDto infoDto) {//회원가입하면 회원정보를 저장
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         infoDto.setPassword(encoder.encode(infoDto.getPassword())); //비밀번호를 암호화해서 저장
-
+        validateDuplicateMember(infoDto);
         return userRepository.save(User.builder()
                 .email(infoDto.getEmail())
                 .auth(infoDto.getAuth())
                 .password(infoDto.getPassword()).build()).getCode();
     }
+
+    private void validateDuplicateMember(UserDto infoDto) {
+        Optional<User> findUsers=userRepository.findByEmail(infoDto.getEmail());
+        if(!findUsers.isEmpty()){
+            throw new IllegalStateException("이미 존재하는 회원입니다");
+        }
+    }
+
 }
