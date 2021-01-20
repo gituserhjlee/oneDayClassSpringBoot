@@ -15,6 +15,33 @@ ID : <span sec:authentication="name"></span> <br>
     <a href="#" th:href="@{/admin}" role="button">관리자 사이트</a>
 
     <input type="submit" value="로그아웃"/>
+    <br>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>설명</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.description}"></td>
+
+
+            </tr>
+
+            </tbody>
+        </table>
+        <a href="/user/buy">예약하기</a>
+    </div>
+    
 </form>
 
 </body>
