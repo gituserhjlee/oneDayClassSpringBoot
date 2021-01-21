@@ -19,6 +19,7 @@ public class UserController {
     private final UserService userService;
 
 
+
     @PostMapping("/user")
     public String signup(UserDto infoDto) { // 회원가입
         userService.save(infoDto);
@@ -30,4 +31,5 @@ public class UserController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/login";
     }
+
 }

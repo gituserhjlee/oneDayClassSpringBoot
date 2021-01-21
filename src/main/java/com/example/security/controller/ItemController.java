@@ -5,8 +5,7 @@ import com.example.security.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +36,25 @@ public class ItemController {
         itemService.save(item);
         return "redirect:/admin";
     }
+    @GetMapping("items/{itemId}/edit")
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+        Item item = itemService.findById(itemId).get();
+        Item item1 = new Item();
+        item1.setId(item.getId());
+        item1.setName(item.getName());
+        item1.setPrice(item.getPrice());
+        item1.setDescription(item.getDescription());
+        model.addAttribute("form", item1);
+        return "updateItemform";
+
+    }
+
+    @PostMapping("items/{itemId}/edit")
+    public String updateItemForm(@PathVariable("itemId") Long itemId, @ModelAttribute("form") Item item) {
+
+         itemService.update(itemId, item);
+         return "redirect:/";
+
+    }
+
 }
