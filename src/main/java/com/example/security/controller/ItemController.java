@@ -36,7 +36,7 @@ public class ItemController {
         itemService.save(item);
         return "redirect:/admin";
     }
-    @GetMapping("items/{itemId}/edit")
+    @GetMapping("/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
         Item item = itemService.findById(itemId).get();
         Item item1 = new Item();
@@ -49,12 +49,18 @@ public class ItemController {
 
     }
 
-    @PostMapping("items/{itemId}/edit")
+    @PostMapping("/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, @ModelAttribute("form") Item item) {
 
          itemService.update(itemId, item);
          return "redirect:/";
 
+    }
+    @DeleteMapping("/items/{itemId}")
+    public String deleteItem(@PathVariable("itemId") Long itemId){
+        itemService.deleteItem(itemId);
+
+        return "redirect:/";
     }
 
 }

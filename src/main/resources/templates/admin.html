@@ -28,6 +28,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <td>
                     <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"
                        class="btn btn-primary" role="button">수정</a>
+                    <form th:action="@{/items/{id} (id=${item.id})}" th:method="delete">
+                        <button type="submit" class="btn btn-primary">삭제</button>
+                    </form>
+
                 </td>
 
             </tr>
