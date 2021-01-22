@@ -25,6 +25,9 @@ public class Item {
     @Column(name="description")
     private String description;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Order order;
+
     @Builder
     public Item(String name, int price,String description){
         this.name=name;

@@ -1,5 +1,6 @@
 package com.example.security.entity.user;
 
+import com.example.security.entity.Order;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,9 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -31,6 +30,9 @@ public class User implements UserDetails {
 
     @Column(name = "auth")
     private String auth;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders=new ArrayList<>();
 
     @Builder
     public User(String email, String password, String auth) {
