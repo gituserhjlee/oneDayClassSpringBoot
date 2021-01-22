@@ -34,6 +34,7 @@ public class ItemController {
         item.setDescription(i.getDescription());
 
         itemService.save(item);
+
         return "redirect:/admin";
     }
     @GetMapping("/items/{itemId}/edit")

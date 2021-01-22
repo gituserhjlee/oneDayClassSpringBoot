@@ -14,6 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "ORDER_DETAIL")
 public class Order {
     @Id @GeneratedValue
     @Column(name="order_id")
