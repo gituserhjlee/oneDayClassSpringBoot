@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Spring 
                 .authorizeRequests() // 접근에 대한 인증 설정이 가능합니다.
                 .antMatchers("/login", "/signup", "/user").permitAll() // 누구나 접근 허용
                 .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
-                .antMatchers("/admin","/items/new").hasRole("ADMIN") // ADMIN만 접근 가능
+                .antMatchers("/admin/makeItem","/admin/order","/admin/admin","/items/new","/items/{itemId}/edit","/items/{itemId}").hasRole("ADMIN") // ADMIN만 접근 가능
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
                 .and()
                 .formLogin()
