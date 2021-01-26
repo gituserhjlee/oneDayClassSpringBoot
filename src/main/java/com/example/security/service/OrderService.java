@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class OrderService {
         //주문 생성
         Order order= Order.createOrder(user, item);
         //주문 저장
-        orderRepositoy.save(order); //cascade all 옵션때문에 이것만 save하면 됨
+        orderRepositoy.save(order);
         return order.getId();
     }
 
@@ -35,5 +37,7 @@ public class OrderService {
         order.cancel();
     }
 
-
+    public List<Order> findOrders(){
+        return orderRepositoy.findAll();
+    }
 }

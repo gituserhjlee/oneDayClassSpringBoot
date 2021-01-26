@@ -16,15 +16,16 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Table(name = "ORDER_DETAIL")
 public class Order {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name="order_id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="code") //매핑을 뭘로할거냐임. 즉 외래키
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "itemId")
     private Item item;
 

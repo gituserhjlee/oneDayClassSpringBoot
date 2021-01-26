@@ -1,6 +1,7 @@
 package com.example.security.controller;
 
 import com.example.security.entity.Item;
+import com.example.security.entity.Order;
 import com.example.security.entity.user.User;
 import com.example.security.service.ItemService;
 import com.example.security.service.OrderService;
@@ -35,6 +36,11 @@ public class OrderController {
         orderService.order(userId, itemId);
         return "redirect:/";
     }
-
+    @GetMapping("/admin/order")
+    public String orderList(Model model){
+        List<Order> orders=orderService.findOrders();
+        model.addAttribute("orders",orders);
+        return "admin/order";
+    }
 
 }

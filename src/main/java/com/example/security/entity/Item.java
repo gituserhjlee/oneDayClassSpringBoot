@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,8 +27,10 @@ public class Item {
     @Column(name="description")
     private String description;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private Order order;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders=new ArrayList<>();
+
+
 
     @Builder
     public Item(String name, int price,String description){
