@@ -12,7 +12,7 @@ ID : <span sec:authentication="name"></span> <br>
 
 <form id="logout" action="/logout" method="POST">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <a href="#" th:href="@{/admin/admin}" role="button">관리자 사이트</a>
+    <a href="#" th:if ="${userAuth} != 'ROLE_USER' " th:href="@{/admin/admin}" role="button">관리자 사이트</a>
 
     <input type="submit" value="로그아웃"/>
     <br>
