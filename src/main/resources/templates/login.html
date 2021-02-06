@@ -3,18 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com.bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        #content{
+            width:400px;
+            margin:auto;
+
+            border-radius: 20px;
+            border:solid 3px #6E6ED7;
+            padding:5px;
+            font-family: 'Poor Story', cursive;
+        }
+        h1{
+            color:#6E6ED7;
+            padding: 15px;
+            border-radius: 40px ;
+            border: solid 5px #6E6ED7;
+            width: 400px;
+            margin: 80px auto;
+            text-align: center;
+            background-color: #D2D2FF;
+            font-family: 'Poor Story', cursive;
+
+        }
+        a{
+            font-family: 'Poor Story', cursive;
+            color:#6E6ED7;
+
+
+        }
+        button{
+            background:#6E6ED7;
+            border-radius:10px;
+            color:white;
+            width:100%;
+        }
+        button:hover{
+            background:white;
+            color:#6E6ED7;
+            border: 2px solid #6E6ED7;
+        }
+    </style>
 </head>
 <body>
-<h1>Login</h1> <hr>
-<img src="/img/toy.jpeg" />
+<h1>로그인</h1> <hr>
+<div id="content">
+    <form action="/login" method="POST" class="form-group">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-<form action="/login" method="POST">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    email : <input type="text" name="username"> <br>
-    password : <input type="password" name="password"> <br>
-    <button type="submit">Login</button>
-</form> <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
 
-<a href="/signup">Go to join! →</a>
+            </div>
+            <input type="text" name="username" class="form-control" placeholder="이메일을 입력하세요"> <br>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <span class="input-group-text label">password</span>
+            </div>
+            <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요"> <br>
+
+        </div>
+
+        <button type="submit">로그인</button>
+    </form> <br>
+    <!--<form action="/login" method="POST">-->
+    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <!--    email : <input type="text" name="username"> <br>-->
+    <!--    password : <input type="password" name="password"> <br>-->
+    <!--    <button type="submit">Login</button>-->
+    <!--</form> <br>-->
+
+    <a href="/signup">회원가입하기→</a>
+</div>
+
 </body>
 </html>
+
+

@@ -3,20 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>sign up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+
+    <style>
+        #content{
+            width:400px;
+            margin:auto;
+
+            border-radius: 20px;
+            border:solid 3px #6E6ED7;
+            padding:5px;
+            font-family: 'Poor Story', cursive;
+        }
+        h1{
+            color:#6E6ED7;
+            padding: 15px;
+            border-radius: 40px ;
+            border: solid 5px #6E6ED7;
+            width: 400px;
+            margin: 80px auto;
+            text-align: center;
+            background-color: #D2D2FF;
+            font-family: 'Poor Story', cursive;
+
+        }
+        a{
+            font-family: 'Poor Story', cursive;
+            color:#6E6ED7;
+
+
+        }
+        button{
+            background:#6E6ED7;
+            border-radius:10px;
+            color:white;
+            width:100%;
+        }
+        button:hover{
+            background:white;
+            color:#6E6ED7;
+            border: 2px solid #6E6ED7;
+        }
+
+    </style>
 
 </head>
 <body>
-<h1>Sign Up</h1> <hr>
+<h1>회원가입</h1>
+<div id="content">
 
+    <form th:action="@{/user}" method="POST" class="form-group" >
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="auth" id="exampleRadios1" value="ROLE_USER" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                User
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="auth" id="exampleRadios2" value="ROLE_ADMIN,ROLE_USER" >
+            <label class="form-check-label" for="exampleRadios2">
+                Admin
+            </label>
+        </div>
+        <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
 
-<form th:action="@{/user}" method="POST">
-    email : <input type="text" name="email"> <br>
-    password : <input type="password" name="password"> <br>
-    <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin
-    <input type="radio" name="auth" value="ROLE_USER" checked="checked"> user <br>
-    <button type="submit">Join</button>
-</form> <br>
+            </div>
+            <input type="text" name="email" class="form-control"  id="email" placeholder="이메일을 입력하세요"> <br>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
 
-<a href="/login">Go to login →</a>
+                <span class="input-group-text label">password</span>
+            </div>
+            <input type="password" name="password" class="form-control" id="password"  placeholder="비밀번호를 입력하세요"> <br>
+
+        </div>
+
+        <button type="submit">가입</button>
+    </form>
+    <br>
+
+    <a href="/login">로그인 →</a>
+</div>
+
 </body>
 </html>
