@@ -25,4 +25,6 @@ public class indexController {
         model.addAttribute("items",items);
         return "main";
     }
+
+
 }
