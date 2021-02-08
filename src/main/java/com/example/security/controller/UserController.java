@@ -8,6 +8,8 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +21,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user")
-    public String signup(UserDto infoDto) { // 회원가입
+    @ResponseBody
+    public UserDto signup(@RequestBody UserDto userDto){
+        userService.save(userDto);
 
-        userService.save(infoDto);
-        return "redirect:/login";
+        return userDto;
     }
 
     @GetMapping("/logout")

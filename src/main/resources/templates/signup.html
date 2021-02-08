@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>sign up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,6 +17,50 @@
             crossorigin="anonymous"></script>
 
 
+    <script>
+        function signUp(){
+            let email=$('#email').val()
+            let password=$('#password').val()
+            let auth=$('input[name="auth"]:checked').val();
+
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+            let name = $("#userName").val();
+
+            if (email === '') return alert('이메일을 입력하세요')
+            if (password === '') return alert('비밀번호를 입력하세요')
+
+            let jsonData={
+
+                "email":email,
+                "password":password,
+                "auth":auth
+            }
+            $.ajax({
+                type:'POST',
+                contentType:"application/json",
+                url:'/user',
+                data:JSON.stringify(jsonData), // String -> json 형태로 변환
+                beforeSend:function (xhr){
+                    xhr.setRequestHeader(header, token);
+				},
+                dataType:'json',
+                async:true,
+                cache:false,
+                success:function (data){
+                    alert('🎉 회원가입이 완료되었습니다 🎉')
+                    location.href = '/login'
+                },
+                error:function (xhr, status, error){
+                    console.log(error)
+                    alert('이미 존재하는 아이디입니다')
+
+                }
+            });
+
+
+        }
+    </script>
     <style>
         #content{
             width:400px;
@@ -62,7 +108,7 @@
 <h1>회원가입</h1>
 <div id="content">
 
-    <form th:action="@{/user}" method="POST" class="form-group" >
+<!--    <form th:action="@{/user}" method="POST" class="form-group" >-->
         <div class="form-check">
             <input class="form-check-input" type="radio" name="auth" id="exampleRadios1" value="ROLE_USER" checked>
             <label class="form-check-label" for="exampleRadios1">
@@ -92,8 +138,8 @@
 
         </div>
 
-        <button type="submit">가입</button>
-    </form>
+        <button type="submit" onclick="signUp()">가입</button>
+<!--    </form>-->
     <br>
 
     <a href="/login">로그인 →</a>
