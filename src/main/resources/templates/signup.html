@@ -18,10 +18,10 @@
 
 
     <script>
-        function signUp(){
-            let email=$('#email').val()
-            let password=$('#password').val()
-            let auth=$('input[name="auth"]:checked').val();
+        function signUp() {
+            let email = $('#email').val()
+            let password = $('#password').val()
+            let auth = $('input[name="auth"]:checked').val();
 
             let token = $("meta[name='_csrf']").attr("content");
             let header = $("meta[name='_csrf_header']").attr("content");
@@ -30,33 +30,41 @@
             if (email === '') return alert('이메일을 입력하세요')
             if (password === '') return alert('비밀번호를 입력하세요')
 
-            let jsonData={
+            let jsonData = {
 
-                "email":email,
-                "password":password,
-                "auth":auth
+                "email": email,
+                "password": password,
+                "auth": auth
             }
             $.ajax({
-                type:'POST',
-                contentType:"application/json",
-                url:'/user',
-                data:JSON.stringify(jsonData), // String -> json 형태로 변환
-                beforeSend:function (xhr){
+                type: 'POST',
+                contentType: "application/json",
+                url: '/user',
+                data: JSON.stringify(jsonData), // String -> json 형태로 변환
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
-				},
-                dataType:'text',
-                success:function (data){
-                    if(data==='POSSIBLE'){
+                },
+                dataType: 'text',
+                success: function (data) {
+                    if (data === 'POSSIBLE') {
                         alert('🎉 회원가입이 완료되었습니다 🎉')
                         location.href = '/login'
-                    }
-                    else{
-                        alert('이미 존재하는 아이디입니다')
-                        location.href = '/signup'
+                    } else {
+                        let temp = `
+                        <div class="alert alert-danger " id="emailErr" >
+                        이미 존재하는 아이디입니다
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+
+                        </div>
+                        `
+                        $('#emailErr').remove()
+                        $('body').append(temp)
+                        // alert('이미 존재하는 아이디입니다')
+
                     }
 
                 },
-                error:function (xhr, status, error){
+                error: function (xhr, status, error) {
                     console.log(error)
 
                 }
@@ -66,42 +74,47 @@
         }
     </script>
     <style>
-        #content{
-            width:400px;
-            margin:auto;
+        body{
+            width: 400px;
+            margin: auto;
+            font-family: 'Poor Story', cursive;
+
+        }
+        #content {
 
             border-radius: 20px;
-            border:solid 3px #6E6ED7;
-            padding:5px;
-            font-family: 'Poor Story', cursive;
+            border: solid 3px #6E6ED7;
+            padding: 5px;
         }
-        h1{
-            color:#6E6ED7;
+
+        h1 {
+            color: #6E6ED7;
             padding: 15px;
-            border-radius: 40px ;
+            border-radius: 40px;
             border: solid 5px #6E6ED7;
-            width: 400px;
             margin: 80px auto;
             text-align: center;
             background-color: #D2D2FF;
-            font-family: 'Poor Story', cursive;
 
         }
-        a{
-            font-family: 'Poor Story', cursive;
-            color:#6E6ED7;
+
+        a {
+            color: #6E6ED7;
+        }
+       #emailErr{
 
 
+       }
+        #signUpbt {
+            background: #6E6ED7;
+            border-radius: 10px;
+            color: white;
+            width: 100%;
         }
-        button{
-            background:#6E6ED7;
-            border-radius:10px;
-            color:white;
-            width:100%;
-        }
-        button:hover{
-            background:white;
-            color:#6E6ED7;
+
+        #signUpbt:hover {
+            background: white;
+            color: #6E6ED7;
             border: 2px solid #6E6ED7;
         }
 
@@ -112,38 +125,38 @@
 <h1>회원가입</h1>
 <div id="content">
 
-<!--    <form th:action="@{/user}" method="POST" class="form-group" >-->
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="auth" id="exampleRadios1" value="ROLE_USER" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                User
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="auth" id="exampleRadios2" value="ROLE_ADMIN,ROLE_USER" >
-            <label class="form-check-label" for="exampleRadios2">
-                Admin
-            </label>
-        </div>
-        <br>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Email</span>
-
-            </div>
-            <input type="text" name="email" class="form-control"  id="email" placeholder="이메일을 입력하세요"> <br>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-
-                <span class="input-group-text label">password</span>
-            </div>
-            <input type="password" name="password" class="form-control" id="password"  placeholder="비밀번호를 입력하세요"> <br>
+    <!--    <form th:action="@{/user}" method="POST" class="form-group" >-->
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="auth" id="exampleRadios1" value="ROLE_USER" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            User
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="auth" id="exampleRadios2" value="ROLE_ADMIN,ROLE_USER">
+        <label class="form-check-label" for="exampleRadios2">
+            Admin
+        </label>
+    </div>
+    <br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Email</span>
 
         </div>
+        <input type="text" name="email" class="form-control" id="email" placeholder="이메일을 입력하세요"> <br>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
 
-        <button type="submit" onclick="signUp()">가입</button>
-<!--    </form>-->
+            <span class="input-group-text label">password</span>
+        </div>
+        <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요"> <br>
+
+    </div>
+
+    <button type="submit" id="signUpbt" onclick="signUp()">가입</button>
+    <!--    </form>-->
     <br>
 
     <a href="/login">로그인 →</a>
