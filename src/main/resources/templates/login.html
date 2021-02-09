@@ -9,51 +9,57 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com.bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        #content{
-            width:400px;
-            margin:auto;
-
-            border-radius: 20px;
-            border:solid 3px #6E6ED7;
-            padding:5px;
+        body {
+            width: 400px;
+            margin: auto;
             font-family: 'Poor Story', cursive;
         }
-        h1{
-            color:#6E6ED7;
+
+        #content {
+            border-radius: 20px;
+            border: solid 3px #6E6ED7;
+            padding: 5px;
+        }
+
+        h1 {
+            color: #6E6ED7;
             padding: 15px;
-            border-radius: 40px ;
+            border-radius: 40px;
             border: solid 5px #6E6ED7;
-            width: 400px;
             margin: 80px auto;
             text-align: center;
             background-color: #D2D2FF;
-            font-family: 'Poor Story', cursive;
 
         }
-        a{
-            font-family: 'Poor Story', cursive;
-            color:#6E6ED7;
+
+        a {
+            color: #6E6ED7;
 
 
         }
-        button{
-            background:#6E6ED7;
-            border-radius:10px;
-            color:white;
-            width:100%;
+
+        #loginbt {
+            background: #6E6ED7;
+            border-radius: 10px;
+            color: white;
+            width: 100%;
         }
-        button:hover{
-            background:white;
-            color:#6E6ED7;
+
+        #loginbt:hover {
+            background: white;
+            color: #6E6ED7;
             border: 2px solid #6E6ED7;
         }
     </style>
 </head>
 <body>
-<h1>로그인</h1> <hr>
+
+<h1>로그인</h1>
+
+<hr>
 <div id="content">
-    <form action="/login" method="POST" class="form-group">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <form th:action="@{/login_proc}" method="POST" class="form-group">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -71,16 +77,15 @@
 
         </div>
 
-        <button type="submit">로그인</button>
-    </form> <br>
-    <!--<form action="/login" method="POST">-->
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-    <!--    email : <input type="text" name="username"> <br>-->
-    <!--    password : <input type="password" name="password"> <br>-->
-    <!--    <button type="submit">Login</button>-->
-    <!--</form> <br>-->
+        <button type="submit" id="loginbt">로그인</button>
+    </form>
+    <br>
 
     <a href="/signup">회원가입하기→</a>
+</div>
+
+
+<div th:if="${param.error}" class="alert alert-danger " th:text="${exception}">
 </div>
 
 </body>

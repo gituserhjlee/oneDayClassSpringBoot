@@ -1,5 +1,6 @@
 package com.example.security.config;
 
+import com.example.security.AuthFailureHandler;
 import com.example.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Spring Security의 설정파일로서의 역할을 하기 위해 상속
 
     private final UserService userService; // 유저 정보를 가져올 클래스
-
+    private final AuthFailureHandler authFailureHandler;
     @Bean
     public PasswordEncoder passwordEncoder() { // 비밀번호를 암호화할 때 사용할 인코더를 미리 빈으로 등록
         return new BCryptPasswordEncoder();
@@ -40,6 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Spring 
                 .and()
                 .formLogin()
                 .loginPage("/login") // 로그인 페이지 링크
+                .loginProcessingUrl("/login_proc")// th:action="@{/login_proc}"
+                .failureHandler(authFailureHandler)
                 .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
                 .and()
                 .logout() // 로그아웃에 관한 설정
