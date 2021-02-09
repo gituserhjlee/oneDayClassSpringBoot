@@ -44,16 +44,20 @@
                 beforeSend:function (xhr){
                     xhr.setRequestHeader(header, token);
 				},
-                dataType:'json',
-                async:true,
-                cache:false,
+                dataType:'text',
                 success:function (data){
-                    alert('🎉 회원가입이 완료되었습니다 🎉')
-                    location.href = '/login'
+                    if(data==='POSSIBLE'){
+                        alert('🎉 회원가입이 완료되었습니다 🎉')
+                        location.href = '/login'
+                    }
+                    else{
+                        alert('이미 존재하는 아이디입니다')
+                        location.href = '/signup'
+                    }
+
                 },
                 error:function (xhr, status, error){
                     console.log(error)
-                    alert('이미 존재하는 아이디입니다')
 
                 }
             });

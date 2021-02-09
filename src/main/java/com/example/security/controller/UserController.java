@@ -22,10 +22,10 @@ public class UserController {
 
     @PostMapping("/user")
     @ResponseBody
-    public UserDto signup(@RequestBody UserDto userDto){
-        userService.save(userDto);
+    public String signup(@RequestBody UserDto userDto){
+        String result=userService.save(userDto);
 
-        return userDto;
+        return result;
     }
 
     @GetMapping("/logout")

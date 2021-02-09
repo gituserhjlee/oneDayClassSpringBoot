@@ -32,21 +32,26 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException((email)));
     }
 
-    public Long save(UserDto infoDto) {//회원가입하면 회원정보를 저장
+    public String save(UserDto infoDto) {//회원가입하면 회원정보를 저장
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         infoDto.setPassword(encoder.encode(infoDto.getPassword())); //비밀번호를 암호화해서 저장
-        validateDuplicateMember(infoDto);
-        return userRepository.save(User.builder()
+        boolean check=validateDuplicateMember(infoDto);
+        if(check==false){
+            return "IMPOSSIBLE";
+        }
+        userRepository.save(User.builder()
                 .email(infoDto.getEmail())
                 .auth(infoDto.getAuth())
-                .password(infoDto.getPassword()).build()).getCode();
+                .password(infoDto.getPassword()).build());
+        return "POSSIBLE";
     }
 
-    private void validateDuplicateMember(UserDto infoDto) {
+    private boolean validateDuplicateMember(UserDto infoDto) {
         Optional<User> findUsers=userRepository.findByEmail(infoDto.getEmail());
         if(!findUsers.isEmpty()){
-            throw new IllegalStateException("이미 존재하는 회원입니다");
+            return false; //이미 존재하는 회원
         }
+        return true;
     }
 
 
