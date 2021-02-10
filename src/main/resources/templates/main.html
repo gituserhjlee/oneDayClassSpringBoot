@@ -3,47 +3,134 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <title>main</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+    <style>
+         body {
+            /*margin: 0;*/
+            /*height: 100%;*/
+            font-family: 'Poor Story', cursive;
+
+        }
+
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+
+        .content {
+            height: 80%;
+            display: flex;
+            flex-direction: row; /* default가 row라서 생략 가능 */
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100%;
+            border-right: solid 2px gainsboro;
+        }
+
+        .userInfo {
+            color: #6E6ED7;
+        }
+
+        .main {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+        }
+
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+
+        h1 {
+            color: #6E6ED7;
+        }
+
+        button{
+            background: #6E6ED7;
+            border-radius: 10px;
+            color: white;
+            width: 100%;
+            font-family: 'Poor Story', cursive;
+            margin: 2px;
+
+        }
+
+        button:hover {
+            background: white;
+            color: #6E6ED7;
+            border: 2px solid #6E6ED7;
+        }
+
+    </style>
 </head>
 <body>
-<h2>회원 전용 페이지</h2>
-ID : <span sec:authentication="name"></span> <br>
-소유 권한 : <span sec:authentication="authorities"></span> <br>
+<div class="nav">
+    <img src="/img/puzzle.png" alt="logo"/>
+    <h1>하비즈</h1>
 
-<form id="logout" action="/logout" method="POST">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <a href="#" th:if ="${userAuth} != 'ROLE_USER' " th:href="@{/admin/admin}" role="button">관리자 사이트</a>
+</div>
+<div class="content">
+    <div class="sidebar">
+        <div class="userInfo">
 
-    <input type="submit" value="로그아웃"/>
-    <br>
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>상품명</th>
-                <th>가격</th>
-                <th>설명</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${items}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.name}"></td>
-                <td th:text="${item.price}"></td>
-                <td th:text="${item.description}"></td>
+            <h3 th:if="${userAuth} != 'ROLE_USER' ">관리자</h3>
+            <h3 th:if="${userAuth} == 'ROLE_USER' ">일반사용자</h3>
+            <h3 sec:authentication="name"></h3>
 
+        </div>
+        <form id="logout" action="/logout" method="POST">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-            </tr>
+            <button type="submit" >로그아웃</button>
 
-            </tbody>
-        </table>
-        <a href="/user/buy">예약하기</a>
+        </form>
+        <!--        소유 권한 : <span sec:authentication="authorities"></span> <br>-->
+        <!--sec:authentication은 현재 로그인된 정보를 알수있게해줌(타임리프 문법) -->
+
+        <button th:if ="${userAuth} != 'ROLE_USER' " onclick="location.href='/admin/admin'">관리자사이트</button>
+
     </div>
+    <div class="main">
+        <br>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>상품명</th>
+                    <th>가격</th>
+                    <th>설명</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td th:text="${item.description}"></td>
 
-</form>
+
+                </tr>
+
+                </tbody>
+            </table>
+            <a  th:if ="${userAuth} == 'ROLE_USER' " href="/user/buy">예약하기</a>
+        </div>
+
+
+    </div>
+</div>
+
 
 </body>
 </html>
-<!--sec:authentication은 현재 로그인된 정보를 알수있게해줌(타임리프 문법인듯) -->

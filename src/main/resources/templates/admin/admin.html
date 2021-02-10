@@ -1,11 +1,47 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+
+    <style>
+        body {
+
+            font-family: 'Poor Story', cursive;
+
+        }
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+        .content {
+            height: 80%;
+            display: flex;
+            flex-direction: row; /* default가 row라서 생략 가능 */
+        }
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+
+        h1 {
+            color: #6E6ED7;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<div class="nav">
+    <img src="/img/puzzle.png" alt="logo"/>
+    <h1>하비즈</h1>
+
+</div>
+<div class="content">
     <a href="#" th:href="@{/admin/makeItem}" role="button">상품등록</a>
 
     <a href="#" th:href="@{/admin/order}" role="button">예약현황</a>
