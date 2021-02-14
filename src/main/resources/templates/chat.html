@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Spring Boot WebSocket Chat Application</title>
+    <div th:replace="header :: header"></div>
+    <title>오픈 채팅방 </title>
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
+<div class="nav" onclick="location.href='/'">
+    <img src="/img/puzzle.png" alt="logo"/>
+    <h1>하비즈</h1>
 
+</div>
 <div id="username-page">
     <div class="username-page-container">
-        <h1 class="title">username을 입력하세요</h1>
+        <h1 class="title">사용할 닉네임을 입력하세요</h1>
         <form id="usernameForm" name="usernameForm">
             <div class="form-group">
                 <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
             </div>
             <div class="form-group">
-                <button type="submit" class="accent username-submit">채팅 시작하기</button>
+                <button type="submit" class="accent username-submit">채팅 시작</button>
             </div>
         </form>
     </div>
@@ -24,7 +28,7 @@
 <div id="chat-page" class="hidden">
     <div class="chat-container">
         <div class="chat-header">
-            <h2>Spring WebSocket Chat Demo</h2>
+            <h2>하비즈 오픈채팅</h2>
         </div>
         <div class="connecting">
             연결중...
@@ -35,8 +39,8 @@
         <form id="messageForm" name="messageForm">
             <div class="form-group">
                 <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                    <button type="submit" class="primary">보내기</button>
+                    <input type="text" id="message" placeholder="메세지를 입력하세요" autocomplete="off" class="form-control"/>
+                    <button type="submit" class="primary">send</button>
                 </div>
             </div>
         </form>

@@ -2,7 +2,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="header :: header"></div>
+    <title>예약하기</title>
+    <style>
+        html,body {
+
+            font-family: 'Poor Story', cursive;
+            width: 100%;
+            height:100%;
+        }
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+        h1 {
+            color: #6E6ED7;
+            font-weight: bold;
+            margin:10px;
+        }
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+        .container{
+            width: 40%;
+            margin-top: 20px;
+        }
+        button{
+            background: #6E6ED7;
+            color: white;
+            border-radius: 10px;
+            width: 100%;
+            font-family: 'Poor Story', cursive;
+            margin: 2px;
+
+        }
+
+        button:hover {
+            background: white;
+            color: #6E6ED7;
+            border: 2px solid #6E6ED7;
+        }
+
+    </style>
+</head>
 <body>
+<div class="nav" onclick="location.href='/'">
+    <img src="/img/puzzle.png" alt="logo"/>
+    <h1>하비즈</h1>
+
+</div>
 <div class="container">
     <form th:action="@{/user/buy}" th:object="${items}" method="post">
         <div class="form-group">
@@ -20,7 +73,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit">Submit</button>
     </form>
     <br/>
 </div> <!-- /container -->

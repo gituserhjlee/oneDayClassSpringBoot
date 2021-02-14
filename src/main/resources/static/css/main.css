@@ -6,31 +6,54 @@
 
 html,body {
     height: 100%;
-    overflow: hidden;
+    font-family: 'Poor Story', cursive;
+    /*overflow: hidden;*/
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.58;
-    color: #333;
-    background-color: #f4f4f4;
-    height: 100%;
+.nav {
+    height: 20%;
+    border-bottom: solid 2px gainsboro;
+    display: flex;
+    flex-display: row;
+    background: white;
 }
 
-body:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #128ff2;
-    content: "";
-    z-index: 0;
+h1 {
+    color: #6E6ED7;
+    font-weight: bold;
+    margin: 10px;
 }
+
+img {
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+}
+body{
+    background: #6E6ED7;
+}
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    font-weight: 400;*/
+/*    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+/*    font-size: 1rem;*/
+/*    line-height: 1.58;*/
+/*    color: #333;*/
+/*    background-color: #f4f4f4;*/
+/*    height: 100%;*/
+/*}*/
+
+/*body:before {*/
+/*    height: 50%;*/
+/*    width: 100%;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    background: #6E6ED7;*/
+/*    content: "";*/
+/*    z-index: 0;*/
+/*}*/
 
 .clearfix:after {
     display: block;
@@ -58,12 +81,12 @@ input {
     outline: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+ h2, h3, h4, h5, h6 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-h1 {
+.title {
     font-size: 1.7em;
 }
 
@@ -84,22 +107,23 @@ button {
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     min-height: 38px;
+    background: #6E6ED7;
 }
 
 button.default {
-    background-color: #e8e8e8;
+    background-color: #6E6ED7;
     color: #333;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
 button.primary {
-    background-color: #128ff2;
+    background-color: #6E6ED7;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
 button.accent {
-    background-color: #ff4743;
+    background-color: #6E6ED7;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }

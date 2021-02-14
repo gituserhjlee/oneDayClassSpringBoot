@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="header :: header"></div>
-    <title>관리자 페이지</title>
+    <title>나의 예약 목록</title>
     <style>
+
         html,body {
 
             font-family: 'Poor Story', cursive;
@@ -37,24 +38,10 @@
             font-weight: bold;
             margin:10px;
         }
-
-        button{
-            background: white;
-            border-radius: 10px;
-            color: #6E6ED7;
-            width: 100%;
-            font-family: 'Poor Story', cursive;
-            margin: 2px;
-
+        .list {
+            width: 80%;
+            margin: 0 auto;
         }
-
-        button:hover {
-            background: #6E6ED7;
-            color: white;
-            border: 2px solid #6E6ED7;
-        }
-
-
     </style>
 </head>
 <body>
@@ -64,9 +51,33 @@
 
 </div>
 <div class="content">
-    <a href="#" th:href="@{/admin/makeItem}" role="button">상품등록</a>
 
-    <a href="#" th:href="@{/admin/order}" role="button">예약현황</a>
+    <div class="list">
+        <h3>나의 예약 목록</h3>
+        <table class="table table-bordered">
+        <thead>
+        <tr class="table-active">
+            <th scope="col">예약번호</th>
+            <th scope="col">예약자</th>
+            <th scope="col">상품</th>
+            <th scope="col">날짜</th>
+            <th scope="col">상태</th>
+        </tr>
+        </thead>
+        <tbody th:if = "${orders != null}">
+        <tr  th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.user.getEmail}"></td>
+            <td th:text="${order.item.getName}"></td>
+            <td th:text=" ${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+            <td th:text="${order.status}"></td>
+
+
+        </tr>
+
+        </tbody>
+    </table></div>
+
 
 </div>
 </body>
