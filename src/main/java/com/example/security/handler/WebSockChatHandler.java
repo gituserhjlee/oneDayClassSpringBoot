@@ -1,4 +1,4 @@
-package com.example.security;
+package com.example.security.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

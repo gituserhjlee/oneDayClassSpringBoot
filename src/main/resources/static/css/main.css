@@ -17,7 +17,12 @@ html,body {
     flex-display: row;
     background: white;
 }
-
+.header{
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+}
 h1 {
     color: #6E6ED7;
     font-weight: bold;
@@ -93,7 +98,11 @@ input {
 a {
     color: #128ff2;
 }
+#exit{
+    background: white;
+    color:#6E6ED7;
 
+}
 button {
     box-shadow: none;
     border: 1px solid transparent;

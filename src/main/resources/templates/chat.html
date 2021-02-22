@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-<div class="nav" onclick="location.href='/'">
-    <img src="/img/puzzle.png" alt="logo"/>
-    <h1>하비즈</h1>
+<div class="nav" >
+    <div th:replace="header :: nav"></div>
 
 </div>
+<div class="header">
+
+<button onclick="location.href='/'" id="exit" class="primary">채팅 종료</button>
+</div>
+
 <div id="username-page">
     <div class="username-page-container">
         <h1 class="title">사용할 닉네임을 입력하세요</h1>
@@ -29,6 +33,7 @@
     <div class="chat-container">
         <div class="chat-header">
             <h2>하비즈 오픈채팅</h2>
+
         </div>
         <div class="connecting">
             연결중...

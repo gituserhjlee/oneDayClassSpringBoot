@@ -1,6 +1,6 @@
 package com.example.security.config;
 
-import com.example.security.AuthFailureHandler;
+import com.example.security.handler.AuthFailureHandler;
 import com.example.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

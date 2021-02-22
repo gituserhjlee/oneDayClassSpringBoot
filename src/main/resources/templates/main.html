@@ -93,16 +93,15 @@
     </style>
 </head>
 <body>
-<div class="nav" onclick="location.href='/'">
-    <img src="/img/puzzle.png" alt="logo"/>
-    <h1>하비즈</h1>
+<div class="nav" >
+    <div th:replace="header :: nav"></div>
 
 </div>
 <div class="content">
     <div class="sidebar">
         <div class="userInfo">
 
-            <h3 th:if="${userAuth} != 'ROLE_USER' ">권한:관리자</h3>
+            <h3 th:if="${userAuth} != 'ROLE_USER' ">권한:사장님</h3>
             <h3 th:if="${userAuth} == 'ROLE_USER' ">권한:일반사용자</h3>
             <h3 sec:authentication="name"></h3>
 

@@ -1,4 +1,4 @@
-package com.example.security;
+package com.example.security.handler;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;

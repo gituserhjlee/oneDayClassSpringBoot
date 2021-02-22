@@ -5,34 +5,77 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>예약하기</title>
+    <script>
+        function reserve() {
+            let itemId = $("#item option:selected").val()
+            let itemName = $("#item option:selected").text()
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            if (itemId === '') return alert('상품을 선택해주세요')
+            console.log(itemId)
+            console.log(itemName)
+            let jsonData = {
+
+                "itemId": itemId,
+                "itemName": itemName,
+
+            }
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: '/user/buy',
+                data: JSON.stringify(jsonData), // String -> json 형태로 변환
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function () {
+
+                    alert('🎉 예약이 완료되었습니다 🎉')
+                    location.href = '/'
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error)
+
+                }
+            });
+        }
+    </script>
     <style>
-        html,body {
+        html, body {
 
             font-family: 'Poor Story', cursive;
             width: 100%;
-            height:100%;
+            height: 100%;
         }
+
         .nav {
             height: 20%;
             border-bottom: solid 2px gainsboro;
             display: flex;
             flex-display: row;
         }
+
         h1 {
             color: #6E6ED7;
             font-weight: bold;
-            margin:10px;
+            margin: 10px;
         }
+
         img {
             width: 64px;
             height: 64px;
             margin: 10px;
         }
-        .container{
+
+        .container {
             width: 40%;
             margin-top: 20px;
         }
-        button{
+
+        button {
             background: #6E6ED7;
             color: white;
             border-radius: 10px;
@@ -51,30 +94,30 @@
     </style>
 </head>
 <body>
-<div class="nav" onclick="location.href='/'">
-    <img src="/img/puzzle.png" alt="logo"/>
-    <h1>하비즈</h1>
+<div class="nav">
+    <div th:replace="header :: nav"></div>
 
 </div>
 <div class="container">
-    <form th:action="@{/user/buy}" th:object="${items}" method="post">
-        <div class="form-group">
+    <!--    <form th:action="@{/user/buy}" th:object="${items}" method="post">-->
+    <div class="form-group">
 
-            ID: <span sec:authentication="name" ></span>
+        ID: <span sec:authentication="name"></span>
 
-        </div>
-        <div class="form-group">
-            <label for="item">상품명</label>
-            <select name="itemId" id="item" class="form-control">
-                <option value="">상품선택</option>
-                <option th:each="item : ${items}"
-                        th:value="${item.id}"
-                        th:text="${item.name}" />
-            </select>
-        </div>
+    </div>
+    <div class="form-group">
+        <label for="item">상품명</label>
+        <select id="item" class="form-control">
+            <option value="">상품선택</option>
+            <option th:each="item : ${items}"
+                    th:value="${item.id}"
+                    th:text="${item.name}"
+            />
+        </select>
+    </div>
 
-        <button type="submit">Submit</button>
-    </form>
+    <button type="submit" onclick="reserve()">예약하기</button>
+    <!--    </form>-->
     <br/>
 </div> <!-- /container -->
 </body>

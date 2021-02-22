@@ -1,5 +1,6 @@
 package com.example.security.controller;
 
+import com.example.security.dto.ItemDto;
 import com.example.security.entity.Item;
 import com.example.security.entity.Order;
 import com.example.security.entity.user.User;
@@ -9,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,11 +29,12 @@ public class OrderController {
 
     }
     @PostMapping("/user/buy")
-    public String order(@RequestParam("itemId") Long itemId){
+    @ResponseBody
+    public void order(@RequestBody ItemDto item){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = user.getCode();
-        orderService.order(userId, itemId);
-        return "redirect:/";
+        orderService.order(userId, item.getItemId());
+//        return "redirect:/";
     }
     @GetMapping("/admin/order")
     public String orderList(Model model){

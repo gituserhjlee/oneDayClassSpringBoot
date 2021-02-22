@@ -20,7 +20,7 @@ public class OrderService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
-    public Long order(Long userId, Long itemId) {
+    public String order(Long userId, Long itemId) {
         //엔터티 조회
         User user = userRepository.findById(userId).get();
         Item item = itemRepository.findById(itemId).get();
@@ -29,7 +29,7 @@ public class OrderService {
         Order order = Order.createOrder(user, item);
         //주문 저장
         orderRepositoy.save(order);
-        return order.getId();
+        return "성공";
     }
 
     public void cancelOrder(Long orderId) {
