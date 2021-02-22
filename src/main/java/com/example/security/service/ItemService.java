@@ -20,6 +20,7 @@ public class ItemService {
                 .name(item.getName())
                 .price(item.getPrice())
                 .description(item.getDescription())
+                .user(item.getUser())
                 .build()).getId();
 
 

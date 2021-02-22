@@ -25,7 +25,7 @@
                 type: 'POST',
                 contentType: "application/json",
                 url: '/user/buy',
-                data: JSON.stringify(jsonData), // String -> json 형태로 변환
+                data: JSON.stringify(jsonData),
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
                 },

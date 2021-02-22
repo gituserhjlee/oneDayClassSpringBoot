@@ -1,5 +1,6 @@
 package com.example.security.entity.user;
 
+import com.example.security.entity.Item;
 import com.example.security.entity.Order;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,6 +31,9 @@ public class User implements UserDetails {
 
     @Column(name = "auth")
     private String auth;
+
+    @OneToMany(mappedBy = "user" ,fetch = FetchType.EAGER)
+    private List<Item> items=new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders=new ArrayList<>();

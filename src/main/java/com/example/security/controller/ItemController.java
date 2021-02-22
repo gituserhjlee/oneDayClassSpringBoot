@@ -1,8 +1,10 @@
 package com.example.security.controller;
 
 import com.example.security.entity.Item;
+import com.example.security.entity.user.User;
 import com.example.security.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +35,12 @@ public class ItemController {
 
     @PostMapping("/items/new")
     public String create(Item i){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Item item=new Item();
         item.setName(i.getName());
         item.setPrice(i.getPrice());
         item.setDescription(i.getDescription());
+        item.setUser(user);
 
         itemService.save(item);
 

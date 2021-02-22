@@ -34,7 +34,6 @@ public class OrderController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = user.getCode();
         orderService.order(userId, item.getItemId());
-//        return "redirect:/";
     }
     @GetMapping("/admin/order")
     public String orderList(Model model){
