@@ -3,39 +3,90 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>상품목록</title>
+    <style>
+        html,body {
+
+            font-family: 'Poor Story', cursive;
+            height:100%;
+        }
+
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+
+        h1 {
+            color: #6E6ED7;
+            font-weight: bold;
+            margin:10px;
+        }
+
+        button{
+            background: white;
+            border-radius: 10px;
+            color: #6E6ED7;
+            font-family: 'Poor Story', cursive;
+
+
+        }
+
+        button:hover {
+            background: #6E6ED7;
+            color: white;
+            border: 2px solid #6E6ED7;
+        }
+        a{
+            color:#6E6ED7;
+        }
+        #itemregi{
+            margin:10px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<div class="nav" >
+    <div th:replace="header :: nav"></div>
 
+</div>
+<div class="container">
+    <button onclick="location.href='/items/new'" id="itemregi" >상품 등록</button>
     <div>
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>#</th>
-                <th>상품명</th>
-                <th>가격</th>
-                <th>설명</th>
-                <th></th>
+            <tr class="table-active">
+                <th scope="col">#</th>
+                <th scope="col">상품명</th>
+                <th scope="col">가격</th>
+                <th scope="col">설명</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
+
             <tr th:each="item : ${items}">
-                <td th:text="${item.id}"></td>
+                <td scope="row" th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.price}"></td>
                 <td th:text="${item.description}"></td>
 
                 <td>
                     <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"
-                       class="btn btn-primary" role="button">수정</a>
+                        role="button">수정</a>
+
                     <form th:action="@{/items/{id} (id=${item.id})}" th:method="delete">
-                        <button type="submit" class="btn btn-primary">삭제</button>
+                        <button type="submit" >삭제</button>
                     </form>
 
                 </td>
 
             </tr>
-            <p> <a href="/items/new">상품 등록</a></p>
             </tbody>
         </table>
     </div>

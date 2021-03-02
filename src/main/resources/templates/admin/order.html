@@ -3,23 +3,59 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>예약목록</title>
+    <style>
+        html,body {
+
+            font-family: 'Poor Story', cursive;
+            height:100%;
+        }
+
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+        h1 {
+            color: #6E6ED7;
+            font-weight: bold;
+            margin:10px;
+        }
+        .container{
+            width: 80%;
+            margin: 0 auto;
+        }
+        table{
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 
 <body>
-<div>
+<div class="nav" >
+    <div th:replace="header :: nav"></div>
+
+</div>
+<div class="container">
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>user</th>
-            <th>상품</th>
-            <th>날짜</th>
-            <th>상태</th>
+        <tr class="table-active">
+            <th scope="col">#</th>
+            <th scope="col">user</th>
+            <th scope="col">상품</th>
+            <th scope="col">날짜</th>
+            <th scope="col">상태</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="order : ${orders}">
-            <td th:text="${order.id}"></td>
+            <td scope="row" th:text="${order.id}"></td>
             <td th:text="${order.user.getEmail}"></td>
             <td th:text="${order.item.getName}"></td>
             <td th:text="${order.orderDate}"></td>

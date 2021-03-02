@@ -3,8 +3,55 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>상품등록</title>
+    <style>
+        html, body {
+
+            font-family: 'Poor Story', cursive;
+            height: 100%;
+        }
+
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+
+
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+
+        h1 {
+            color: #6E6ED7;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        button {
+            border-radius: 10px;
+            background: #6E6ED7;
+            color: white;
+
+            font-family: 'Poor Story', cursive;
+            margin: 2px;
+
+        }
+
+        button:hover {
+            background: white;
+            color: #6E6ED7;
+            border: 2px solid #6E6ED7;
+        }
+    </style>
 </head>
 <body>
+<div class="nav">
+    <div th:replace="header :: nav"></div>
+
+</div>
 <div class="container">
     <form th:action="@{/items/new}" th:object="${form}" method="post">
         <div class="form-group">
@@ -22,7 +69,7 @@
             <input type="text" th:field="*{description}" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit">Submit</button>
     </form>
     <br/>
 </div> <!-- /container -->

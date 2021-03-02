@@ -3,8 +3,38 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>상품 변경</title>
+    <style>
+        html,body {
+
+            font-family: 'Poor Story', cursive;
+            height:100%;
+        }
+
+        .nav {
+            height: 20%;
+            border-bottom: solid 2px gainsboro;
+            display: flex;
+            flex-display: row;
+        }
+        img {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+        h1 {
+            color: #6E6ED7;
+            font-weight: bold;
+            margin:10px;
+        }
+
+
+    </style>
 </head>
 <body>
+<div class="nav" >
+    <div th:replace="header :: nav"></div>
+
+</div>
 <div class="container">
     <form th:action="@{/items/{id}/edit (id=${form.id})}" th:object="${form}" method="post">
         <!-- id -->
