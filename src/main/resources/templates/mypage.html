@@ -5,10 +5,10 @@
     <title>나의 예약 목록</title>
     <style>
 
-        html,body {
+        html, body {
 
             font-family: 'Poor Story', cursive;
-            height:100%;
+            height: 100%;
         }
 
         .nav {
@@ -36,8 +36,9 @@
         h1 {
             color: #6E6ED7;
             font-weight: bold;
-            margin:10px;
+            margin: 10px;
         }
+
         .list {
             width: 80%;
             margin: 0 auto;
@@ -45,7 +46,7 @@
     </style>
 </head>
 <body>
-<div class="nav" >
+<div class="nav">
     <div th:replace="header :: nav"></div>
 
 </div>
@@ -54,28 +55,34 @@
     <div class="list">
         <h3>나의 예약 목록</h3>
         <table class="table table-bordered">
-        <thead>
-        <tr class="table-active">
-            <th scope="col">예약번호</th>
-            <th scope="col">예약자</th>
-            <th scope="col">상품</th>
-            <th scope="col">날짜</th>
-            <th scope="col">상태</th>
-        </tr>
-        </thead>
-        <tbody th:if = "${orders != null}">
-        <tr  th:each="order : ${orders}">
-            <td th:text="${order.id}"></td>
-            <td th:text="${order.user.getEmail}"></td>
-            <td th:text="${order.item.getName}"></td>
-            <td th:text=" ${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
-            <td th:text="${order.status}"></td>
+            <thead>
+            <tr class="table-active">
+                <th scope="col">예약번호</th>
+                <th scope="col">예약자</th>
+                <th scope="col">상품</th>
+                <th scope="col">날짜</th>
+                <th scope="col">상태</th>
+                <th scope="col">취소</th>
+            </tr>
+            </thead>
+            <tbody th:if="${orders != null}">
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.user.getEmail}"></td>
+                <td th:text="${order.item.getName}"></td>
+                <td th:text=" ${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                <td th:text="${order.status}"></td>
+                <td>
+                    <form th:action="@{/orders/{orderId}/cancel (orderId=${order.id})}" th:method="post">
+                        <button type="submit" >취소</button>
+                    </form>
+                </td>
 
+            </tr>
 
-        </tr>
-
-        </tbody>
-    </table></div>
+            </tbody>
+        </table>
+    </div>
 
 
 </div>

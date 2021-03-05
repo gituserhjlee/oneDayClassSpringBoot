@@ -44,4 +44,10 @@ public class OrderController {
         return "admin/order";
     }
 
+    @PostMapping(value = "/orders/{orderId}/cancel")
+    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+        orderService.cancelOrder(orderId);
+        return "redirect:/mypage";
+    }
+
 }
