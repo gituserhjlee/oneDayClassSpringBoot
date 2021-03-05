@@ -23,7 +23,8 @@ public class ItemController {
     }
     @GetMapping("/admin/makeItem")
     public String list(Model model){
-        List<Item> items=itemService.findItems();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Item> items=itemService.findByUser(user);
         model.addAttribute("items", items);
         return "admin/makeItem";
     }

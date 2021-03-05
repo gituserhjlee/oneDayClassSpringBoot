@@ -1,6 +1,7 @@
 package com.example.security.service;
 
 import com.example.security.entity.Item;
+import com.example.security.entity.user.User;
 import com.example.security.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class ItemService {
    }
     public List<Item> findItems(){
         return itemRepository.findAll();
+    }
+    public List<Item> findByUser(User user){
+        return itemRepository.findByUser(user);
     }
     public Optional<Item> findById(Long id){
         return itemRepository.findById(id);
