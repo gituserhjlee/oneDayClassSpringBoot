@@ -35,9 +35,11 @@ public class OrderController {
         Long userId = user.getCode();
         orderService.order(userId, item.getItemId());
     }
-    @GetMapping("/admin/order")
+    @GetMapping("/admin/order")//관리자 예약 현황에서 본인이 올린 상품에 대해서만 뜨게 하기
     public String orderList(Model model){
-        List<Order> orders=orderService.findOrders();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long userId = user.getCode();//관리자 아이디
+        List<Order> orders=orderService.findOrders(userId);
         model.addAttribute("orders",orders);
         return "admin/order";
     }
