@@ -21,13 +21,13 @@ public class OrderService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
-    public void order(Long userId, Long itemId) {
+    public void order(Long userId, Long itemId, int stock) {
         //엔터티 조회
         User user = userRepository.findById(userId).get();
         Item item = itemRepository.findById(itemId).get();
 
         //주문 생성
-        Order order = Order.createOrder(user, item);
+        Order order = Order.createOrder(user, item, stock);
         //주문 저장
         orderRepositoy.save(order);
     }

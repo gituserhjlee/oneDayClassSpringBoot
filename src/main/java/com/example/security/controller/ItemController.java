@@ -40,6 +40,7 @@ public class ItemController {
         Item item=new Item();
         item.setName(i.getName());
         item.setPrice(i.getPrice());
+        item.setStock(i.getStock());
         item.setDescription(i.getDescription());
         item.setUser(user);
 
@@ -54,6 +55,7 @@ public class ItemController {
         item1.setId(item.getId());
         item1.setName(item.getName());
         item1.setPrice(item.getPrice());
+        item1.setStock(item.getStock());
         item1.setDescription(item.getDescription());
         model.addAttribute("form", item1);
         return "updateItemform";

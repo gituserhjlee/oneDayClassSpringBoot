@@ -65,6 +65,7 @@
                 <th scope="col">상품명</th>
                 <th scope="col">가격</th>
                 <th scope="col">설명</th>
+                <th scope="col">정원</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -75,6 +76,7 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.price}"></td>
                 <td th:text="${item.description}"></td>
+                <td th:text="${item.stock}"></td>
 
                 <td>
                     <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"

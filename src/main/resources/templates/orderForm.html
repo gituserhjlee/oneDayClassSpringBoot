@@ -9,16 +9,18 @@
         function reserve() {
             let itemId = $("#item option:selected").val()
             let itemName = $("#item option:selected").text()
+            let stock=$("#stock").val()
             let token = $("meta[name='_csrf']").attr("content");
             let header = $("meta[name='_csrf_header']").attr("content");
 
             if (itemId === '') return alert('상품을 선택해주세요')
-            console.log(itemId)
-            console.log(itemName)
+            if (stock === '') return alert('신청인원을 선택해주세요')
+
             let jsonData = {
 
                 "itemId": itemId,
                 "itemName": itemName,
+                "stock":stock
 
             }
             $.ajax({
@@ -114,6 +116,10 @@
                     th:text="${item.name}"
             />
         </select>
+
+        <label th:for="stock">정원</label>
+        <input id="stock" type="number" class="form-control">
+
     </div>
 
     <button type="submit" onclick="reserve()">예약하기</button>

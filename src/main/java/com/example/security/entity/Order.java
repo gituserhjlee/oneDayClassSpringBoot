@@ -34,23 +34,28 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @Column(name="count")
+    private int count; //주문 인원수
+
     public void setUser(User user) {
         this.user = user;
         user.getOrders().add(this);
     }
 
-    public static Order createOrder(User user,Item item){
+    public static Order createOrder(User user,Item item, int count){
         Order order=new Order();
         order.setUser(user);
         order.setItem(item);
         order.setStatus(OrderStatus.ORDER);
+        order.setCount(count);
         order.setOrderDate(LocalDateTime.now());
+        item.removeStock(count);
         return order;
     }
 
     public void cancel(){
         this.setStatus(OrderStatus.CANCEL);
-
+        getItem().addStock(count);
     }
 
 

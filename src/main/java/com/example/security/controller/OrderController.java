@@ -33,7 +33,7 @@ public class OrderController {
     public void order(@RequestBody ItemDto item){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = user.getCode();
-        orderService.order(userId, item.getItemId());
+        orderService.order(userId, item.getItemId(), item.getStock());
     }
     @GetMapping("/admin/order")//관리자 예약 현황에서 본인이 올린 상품에 대해서만 뜨게 하기
     public String orderList(Model model){

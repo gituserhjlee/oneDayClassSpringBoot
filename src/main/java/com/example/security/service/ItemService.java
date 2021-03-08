@@ -21,6 +21,7 @@ public class ItemService {
                 .name(item.getName())
                 .price(item.getPrice())
                 .description(item.getDescription())
+                .stock(item.getStock())
                 .user(item.getUser())
                 .build()).getId();
 
@@ -28,7 +29,7 @@ public class ItemService {
     }
    public Long update(Long id, Item item){
         Item it=itemRepository.findById(id).orElseThrow(()->new IllegalArgumentException("없는 게시물"));
-        it.update(item.getName(), item.getPrice(),item.getDescription());
+        it.update(item.getName(), item.getPrice(),item.getDescription(), item.getStock());
         return id;
    }
     public List<Item> findItems(){

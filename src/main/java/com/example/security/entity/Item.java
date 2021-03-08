@@ -31,6 +31,9 @@ public class Item {
     @Column(name="price")
     private int price;
 
+    @Column(name="stock")
+    private int stock;
+
     @Column(name="description")
     private String description;
 
@@ -43,16 +46,25 @@ public class Item {
     }
 
     @Builder
-    public Item(String name, int price,String description , User user){
+    public Item(String name, int price,String description ,int stock, User user){
         this.name=name;
         this.price=price;
         this.description=description;
+        this.stock=stock;
         this.user=user;
     }
-    public void update(String name, int price, String description) {
+    public void update(String name, int price, String description ,int stock) {
         this.name=name;
         this.price=price;
         this.description=description;
+        this.stock=stock;
+    }
+    public void addStock(int quantity){
+        this.stock+=quantity;
+    }
+    public void removeStock(int quantity) {
+        int restStock = this.stock - quantity;
+        this.stock = restStock;
     }
 
 }

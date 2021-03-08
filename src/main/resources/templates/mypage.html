@@ -61,6 +61,7 @@
                 <th scope="col">예약자</th>
                 <th scope="col">상품</th>
                 <th scope="col">날짜</th>
+                <th scope="col">신청인원수</th>
                 <th scope="col">상태</th>
                 <th scope="col">취소</th>
             </tr>
@@ -71,11 +72,14 @@
                 <td th:text="${order.user.getEmail}"></td>
                 <td th:text="${order.item.getName}"></td>
                 <td th:text=" ${#temporals.format(order.orderDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                <td th:text="${order.getCount}"></td>
                 <td th:text="${order.status}"></td>
                 <td>
                     <form th:action="@{/orders/{orderId}/cancel (orderId=${order.id})}" th:method="post">
                         <button type="submit" >취소</button>
+
                     </form>
+
                 </td>
 
             </tr>
