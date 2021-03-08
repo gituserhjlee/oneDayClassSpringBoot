@@ -3,7 +3,7 @@
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="header :: header"></div>
-    <title>취미 찾는 공간 하비즈에 오신것을 환영합니다</title>
+    <title>원데이 클래스 예약 공간 하비즈에 오신것을 환영합니다. </title>
     <style>
         html, body {
 
@@ -126,7 +126,7 @@
         <button id="reservebt" th:if="${userAuth} == 'ROLE_USER' " onclick="location.href='/user/buy'">예약하기</button>
 
         <div class="list">
-            <h3>예약 가능 목록</h3>
+            <h3>예약 가능한 원데이 클래스</h3>
             <table class="table table-bordered">
                 <thead>
                 <tr class="table-active">

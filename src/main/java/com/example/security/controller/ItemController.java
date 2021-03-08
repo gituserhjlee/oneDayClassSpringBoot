@@ -35,7 +35,8 @@ public class ItemController {
     }
 
     @PostMapping("/items/new")
-    public String create(Item i){
+    @ResponseBody
+    public String create(@RequestBody Item i){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Item item=new Item();
         item.setName(i.getName());

@@ -3,6 +3,50 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>상품등록</title>
+    <script>
+        function create() {
+            let name = $('#name').val()
+            let price = $('#price').val()
+            let description = $('#description').val()
+            let stock = $('#stock').val()
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            if (name === '') return alert('이름을 입력하세요')
+            if (price === '') return alert('가격을 입력하세요')
+            if (description === '') return alert('설명을 입력하세요')
+            if (stock === '') return alert('정원을 입력하세요')
+
+            let jsonData = {
+                "name": name,
+                "price": price,
+                "description": description,
+                "stock": stock
+            }
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: '/items/new',
+                data: JSON.stringify(jsonData),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function () {
+                    alert('상품 등록이 완료되었습니다')
+                    location.href = '/'
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error)
+
+                }
+            });
+
+
+        }
+
+
+    </script>
     <style>
         html, body {
 
@@ -53,29 +97,29 @@
 
 </div>
 <div class="container">
-    <form th:action="@{/items/new}" th:object="${form}" method="post">
-        <div class="form-group">
-            <label th:for="name">상품명</label>
-            <input type="text" th:field="*{name}" class="form-control"
-                   placeholder="이름을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="price">가격</label>
-            <input type="number" th:field="*{price}" class="form-control"
-                   placeholder="가격을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="description">설명</label>
-            <input type="text" th:field="*{description}" class="form-control">
-        </div>
-        <div class="form-group">
-            <label th:for="stock">정원</label>
-            <input type="number" th:field="*{stock}" class="form-control">
-        </div>
 
-        <button type="submit">Submit</button>
-    </form>
+    <div class="form-group">
+        <label for="name">상품명</label>
+        <input id="name" type="text" class="form-control"
+               placeholder="이름을 입력하세요">
+    </div>
+    <div class="form-group">
+        <label for="price">가격</label>
+        <input id="price" type="number" class="form-control"
+               placeholder="가격을 입력하세요">
+    </div>
+    <div class="form-group">
+        <label for="description">설명</label>
+        <input id="description" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="stock">정원</label>
+        <input id="stock" type="number" class="form-control">
+    </div>
+
+    <button type="submit" onclick="create()">등록하기</button>
+
     <br/>
-</div> <!-- /container -->
+</div>
 </body>
 </html>
