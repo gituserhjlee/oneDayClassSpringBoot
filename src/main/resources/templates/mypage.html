@@ -3,6 +3,7 @@
 <head>
     <div th:replace="header :: header"></div>
     <title>나의 예약 목록</title>
+
     <style>
 
         html, body {
@@ -76,7 +77,7 @@
                 <td th:text="${order.status}"></td>
                 <td>
                     <form th:action="@{/orders/{orderId}/cancel (orderId=${order.id})}" th:method="post">
-                        <button type="submit" >취소</button>
+                        <button id='cancel' type="submit" >취소</button>
 
                     </form>
 

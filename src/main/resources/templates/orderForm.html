@@ -31,9 +31,12 @@
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
                 },
-                success: function () {
+                success: function (data) {
+                    if(data==="성공")
+                        alert('🎉 예약이 완료되었습니다 🎉')
+                    else
+                        alert('신청가능한 인원수를 초과하셨습니다')
 
-                    alert('🎉 예약이 완료되었습니다 🎉')
                     location.href = '/'
 
 

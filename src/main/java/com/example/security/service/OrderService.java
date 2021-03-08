@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,15 +22,19 @@ public class OrderService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
-    public void order(Long userId, Long itemId, int stock) {
+    public String order(Long userId, Long itemId, int stock) {
         //엔터티 조회
         User user = userRepository.findById(userId).get();
         Item item = itemRepository.findById(itemId).get();
+        if(item.getStock()>=stock){
+            //주문 생성
+            Order order = Order.createOrder(user, item, stock);
+            //주문 저장
+            orderRepositoy.save(order);
+            return "성공";
+        }
+        return "실패";
 
-        //주문 생성
-        Order order = Order.createOrder(user, item, stock);
-        //주문 저장
-        orderRepositoy.save(order);
     }
 
     public void cancelOrder(Long orderId) {
@@ -52,4 +57,7 @@ public class OrderService {
         return orderRepositoy.findByUser(user);
     }
 
+    public Optional<Order> findById(Long id){
+        return orderRepositoy.findById(id);
+    }
 }

@@ -30,10 +30,11 @@ public class OrderController {
     }
     @PostMapping("/user/buy")
     @ResponseBody
-    public void order(@RequestBody ItemDto item){
+    public String order(@RequestBody ItemDto item){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = user.getCode();
-        orderService.order(userId, item.getItemId(), item.getStock());
+        String result=orderService.order(userId, item.getItemId(), item.getStock());
+        return result;
     }
     @GetMapping("/admin/order")//관리자 예약 현황에서 본인이 올린 상품에 대해서만 뜨게 하기
     public String orderList(Model model){
@@ -46,6 +47,10 @@ public class OrderController {
 
     @PostMapping(value = "/orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId) {
+        Order order=orderService.findById(orderId).get();
+        if(order.getStatus().toString().equals("CANCEL"))
+            return "redirect:/mypage";//이미 취소된거는 아무 액션 안취함
+
         orderService.cancelOrder(orderId);
         return "redirect:/mypage";
     }
